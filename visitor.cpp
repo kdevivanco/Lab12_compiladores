@@ -38,6 +38,16 @@ int WhileStatement::accept(Visitor* visitor) {
     visitor->visit(this);
     return 0;
 }
+
+int ForStatement::accept(Visitor* visitor){
+    visitor->visit(this);
+    return 0;
+}
+
+int NotExp::accept(Visitor *visitor) {
+    visitor->visit(this);
+    return 0;
+}
 ///////////////////////////////////////////////////////////////////////////////////
 
 int PrintVisitor::visit(BinaryExp* exp) {

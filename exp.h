@@ -108,7 +108,7 @@ public:
     Exp *cond,*left, *right;
     list<Stm*> dolist;
     ForStatement(Exp* cond, Exp* l, Exp* r, list<Stm*> dolist);
-    void accept(Visitor* visitor);
+    int accept(Visitor* visitor);
     ~ForStatement();
 };
 

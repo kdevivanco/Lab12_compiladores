@@ -61,15 +61,6 @@ string Exp::binopToChar(BinaryOp op) {
     return c;
 }
 
-// class ForStatement : public Stm {
-// public:
-//     Exp* condition;
-//     list<Stm*> dolist;
-//     ForStatement(Exp* condition, list<Stm*> dolist);
-//     int accept(Visitor* visitor);
-//     ~ForStatement();
-// }
-
 
 ForStatement::ForStatement(Exp* cond, Exp* l, Exp* r, list<Stm*> dolist){
     this->cond = cond;
@@ -78,9 +69,7 @@ ForStatement::ForStatement(Exp* cond, Exp* l, Exp* r, list<Stm*> dolist){
     this->dolist = dolist;
 }
 
-void ForStatement::accept(Visitor* visitor){
-    return visitor->visit(this);
-}
+
 
 ForStatement::~ForStatement(){
     delete cond;
@@ -91,10 +80,8 @@ ForStatement::~ForStatement(){
     }
 }
 
-int AssignStatement::accept(Visitor* visitor){
-    return visitor->visit(this);
-}
+NotExp::NotExp(Exp* e):exp(e) {}
 
-int NotExp::accept(Visitor *visitor) {
-    return visitor->visit(this);
+NotExp::~NotExp()  {
+    delete exp;
 }
