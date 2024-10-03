@@ -45,8 +45,7 @@ int ForStatement::accept(Visitor* visitor){
 }
 
 int NotExp::accept(Visitor *visitor) {
-    visitor->visit(this);
-    return 0;
+    return visitor->visit(this);
 }
 ///////////////////////////////////////////////////////////////////////////////////
 
