@@ -125,6 +125,9 @@ int EVALVisitor::visit(BinaryExp* exp) {
         case LT_OP: result = v1 < v2; break;
         case LE_OP: result = v1 <= v2; break;
         case EQ_OP: result = v1 == v2; break;
+        case AND_OP: result = v1 && v2; break;
+        case OR_OP: result = v1 || v2; break;
+
         default:
             cout << "Operador desconocido" << endl;
             result = 0;
@@ -198,7 +201,7 @@ void EVALVisitor::visit(ForStatement* stm){
 }
 
 void PrintVisitor::visit(ForStatement* stm){
-    cout << "for (";
+    cout << "for(";
     stm->cond->accept(this);
     cout << ",";
     stm->left->accept(this);

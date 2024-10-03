@@ -85,14 +85,14 @@ Stm* Parser::parseStatement() {
             cout << "Error: se esperaba un '=' después del identificador." << endl;
             exit(1);
         }
-        e = parseCExp();
+        e = parseAExp();
         s = new AssignStatement(lex, e);
     } else if (match(Token::PRINT)) {
         if (!match(Token::PI)) {
             cout << "Error: se esperaba un '(' después de 'print'." << endl;
             exit(1);
         }
-        e = parseCExp();
+        e = parseAExp();
         if (!match(Token::PD)) {
             cout << "Error: se esperaba un ')' después de la expresión." << endl;
             exit(1);
@@ -100,7 +100,7 @@ Stm* Parser::parseStatement() {
         s = new PrintStatement(e);
     }
     else if (match(Token::IF)) {
-        e = parseCExp();
+        e = parseAExp();
         if (!match(Token::THEN)) {
             cout << "Error: se esperaba 'then' después de la expresión." << endl;
             exit(1);
@@ -119,7 +119,7 @@ Stm* Parser::parseStatement() {
 
     }
     else if (match(Token::WHILE)) {
-        e = parseCExp();
+        e = parseAExp();
         if (!match(Token::DO)) {
             cout << "Error: se esperaba 'do' después de la expresión." << endl;
             exit(1);
@@ -270,16 +270,16 @@ Exp* Parser::parseFactor() {
     }
     else if (match(Token::IFEXP)) {
         match(Token::PI);
-        e=parseCExp();
+        e=parseAExp();
         match(Token::COMA);
-        e1=parseCExp();
+        e1=parseAExp();
         match(Token::COMA);
-        e2=parseCExp();
+        e2=parseAExp();
         match(Token::PD);
         return new IFExp(e,e1,e2);
     }
     else if (match(Token::PI)){
-        e = parseCExp();
+        e = parseAExp();
         if (!match(Token::PD)){
             cout << "Falta paréntesis derecho" << endl;
             exit(0);
