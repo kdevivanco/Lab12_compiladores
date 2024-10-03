@@ -187,7 +187,10 @@ void PrintVisitor::visit(WhileStatement* stm){
 
 
 void EVALVisitor::visit(ForStatement* stm){
-    for(int i = 0; i < stm->cond->accept(this); i++){
+    int assign = stm->cond->accept(this);
+    int cond = stm->left->accept(this);
+    int max = stm->right->accept(this);
+    for(assign; assign < cond; assign+= max){
         for (Stm* s : stm->dolist) {
             s->accept(this);
         }
@@ -195,14 +198,21 @@ void EVALVisitor::visit(ForStatement* stm){
 }
 
 void PrintVisitor::visit(ForStatement* stm){
-    cout << "for ";
+    cout << "for (";
     stm->cond->accept(this);
-    cout << " do";
+    cout << ";";
+    stm->left->accept(this);
+    cout << ";";
+    stm->right->accept(this);
+    cout << ";";
+    cout << ")";
     cout << endl;
     for (Stm* s : stm->dolist) {
         cout << "    ";
         s->accept(this);
     }
+    cout << endl;
+    cout << "endfor";
 }
 
 

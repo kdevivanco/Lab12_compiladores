@@ -164,10 +164,10 @@ Stm* Parser::parseStatement() {
             exit(1);
         }
 
-        if (!match(Token::DO)) {
-            cout << "Error: se esperaba 'do' después de la expresión." << endl;
-            exit(1);
-        }
+//        if (!match(Token::DO)) {
+//            cout << "Error: se esperaba 'do' después de la expresión." << endl;
+//            exit(1);
+//        }
         list<Stm*> dolist;
         dolist = parseStmList();
         if (!match(Token::ENDFOR)) {

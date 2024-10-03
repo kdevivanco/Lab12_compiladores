@@ -46,8 +46,17 @@ Token* Scanner::nextToken() {
             token = new Token(Token::WHILE, word, 0, word.length());
         } else if (word == "endwhile") {
             token = new Token(Token::ENDWHILE, word, 0, word.length());
-        }
-        else if (word == "do") {
+        } else if (word == "for") {
+            token = new Token(Token::FOR, word, 0, word.length());
+        } else if (word == "endfor") {
+            token = new Token(Token::ENDFOR, word, 0, word.length());
+        } else if (word == "and") {
+            token = new Token(Token::AND, word, 0, word.length());
+        } else if (word == "or") {
+            token = new Token(Token::OR, word, 0, word.length());
+        } else if (word == "not") {
+            token = new Token(Token::NOT, word, 0, word.length());
+        } else if (word == "do") {
             token = new Token(Token::DO, word, 0, word.length());
         }else {
             token = new Token(Token::ID, word, 0, word.length());
