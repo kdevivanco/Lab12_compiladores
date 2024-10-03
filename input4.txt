@@ -1,0 +1,12 @@
+valor = 0;
+filas = 4;
+columnas = 4;
+for(1,filas,1)
+    for(1,columnas,1)
+        valor = valor + 1
+    endfor
+endfor;
+
+print(filas*columnas);
+
+print(valor)

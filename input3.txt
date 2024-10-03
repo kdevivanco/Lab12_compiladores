@@ -1,0 +1,12 @@
+a = 1 and (1 or (1 and 0));
+b = (((1 and 1) or 1) and 0);
+c = not b and a;
+d = not (b or a);
+print(a);
+print(b);
+print(not a);
+print(not b);
+print(c);
+print(d);
+
+print(not (not 0) == 0)

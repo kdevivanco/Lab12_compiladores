@@ -1,0 +1,12 @@
+inicio = 1;
+final = 5;
+salto = 1;
+valor = 0;
+for(inicio,final,salto)
+    if (valor == 6) then
+        print(valor)
+    else
+        valor = valor + 2
+    endif
+endfor
+
