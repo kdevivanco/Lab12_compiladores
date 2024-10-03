@@ -190,7 +190,7 @@ void EVALVisitor::visit(ForStatement* stm){
     int assign = stm->cond->accept(this);
     int cond = stm->left->accept(this);
     int max = stm->right->accept(this);
-    for(assign; assign < cond; assign+= max){
+    for(assign; assign <= cond; assign+= max){
         for (Stm* s : stm->dolist) {
             s->accept(this);
         }
