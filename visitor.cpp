@@ -200,11 +200,10 @@ void EVALVisitor::visit(ForStatement* stm){
 void PrintVisitor::visit(ForStatement* stm){
     cout << "for (";
     stm->cond->accept(this);
-    cout << ";";
+    cout << ",";
     stm->left->accept(this);
-    cout << ";";
+    cout << ",";
     stm->right->accept(this);
-    cout << ";";
     cout << ")";
     cout << endl;
     for (Stm* s : stm->dolist) {
