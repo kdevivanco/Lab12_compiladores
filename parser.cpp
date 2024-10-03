@@ -134,7 +134,36 @@ Stm* Parser::parseStatement() {
 
     }
     else if (match(Token::FOR)){
-        e = parseCExp();
+        Exp* a1 = nullptr;
+        Exp* a2 = nullptr;
+        Exp* a3 = nullptr;
+
+        if(!match(Token::PI)){
+            cout << "Error: se esperaba '(' después de 'for'." << endl;
+            exit(1);
+        }
+
+        a1 = parseAExp();
+
+        if(!match(Token::COMA)){
+            cout << "Error: se esperaba ',' después de la primera expresión." << endl;
+            exit(1);
+        }
+
+        a2 = parseCExp();
+
+        if(!match(Token::COMA)){
+            cout << "Error: se esperaba ',' después de la segunda expresión." << endl;
+            exit(1);
+        }
+
+        a3 = parseAExp();
+
+        if(!match(Token::PD)){
+            cout << "Error: se esperaba ')' después de la tercera expresión." << endl;
+            exit(1);
+        }
+
         if (!match(Token::DO)) {
             cout << "Error: se esperaba 'do' después de la expresión." << endl;
             exit(1);
@@ -145,13 +174,37 @@ Stm* Parser::parseStatement() {
             cout << "Error: se esperaba 'endfor' al final de la declaración." << endl;
             exit(1);
         }
-        s = new ForStatement(e, dolist);
+        s = new ForStatement(a1, a2, a3, dolist);
     }
     else {
         cout << "Error: Se esperaba un identificador o 'print', pero se encontró: " << *current << endl;
         exit(1);
     }
     return s;
+}
+
+Exp* Parser::parseAExp() {
+    Exp* left = parseBExp();
+
+    if(match(Token::AND) || match(Token::OR)){
+        BinaryOp op;
+        if (previous->type == Token::AND){
+            op = AND_OP;
+        }
+        else if (previous->type == Token::OR){
+            op = OR_OP;
+        }
+        Exp* right = parseBExp();
+        left = new BinaryExp(left, right, op);
+    }
+    return left;
+}
+
+Exp* Parser::parseBExp(){
+    if(!match(Token::NOT)){
+        return parseCExp();
+    }
+    return new NotExp(parseCExp());
 }
 
 Exp* Parser::parseCExp(){

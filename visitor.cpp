@@ -177,7 +177,7 @@ void PrintVisitor::visit(WhileStatement* stm){
 
 
 void EVALVisitor::visit(ForStatement* stm){
-    for(int i = 0; i < stm->condition->accept(this); i++){
+    for(int i = 0; i < stm->cond->accept(this); i++){
         for (Stm* s : stm->dolist) {
             s->accept(this);
         }
@@ -186,7 +186,7 @@ void EVALVisitor::visit(ForStatement* stm){
 
 void PrintVisitor::visit(ForStatement* stm){
     cout << "for ";
-    stm->condition->accept(this);
+    stm->cond->accept(this);
     cout << " do";
     cout << endl;
     for (Stm* s : stm->dolist) {
@@ -206,6 +206,10 @@ int EVALVisitor::visit(IFExp* pepito) {
     }
 }
 
+int EVALVisitor::visit(NotExp *exp) {
+    return !exp->exp->accept(this);
+}
+
 
 int PrintVisitor::visit(IFExp* pepito) {
     cout<< "ifexp(";
@@ -215,5 +219,12 @@ int PrintVisitor::visit(IFExp* pepito) {
     cout<< ",";
     pepito->right->accept(this);
     cout << ")" ;
+    return 0;
+}
+
+int PrintVisitor::visit(NotExp *exp) {
+    cout << "not(";
+    exp->exp->accept(this);
+    cout << ")";
     return 0;
 }

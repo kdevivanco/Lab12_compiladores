@@ -71,17 +71,21 @@ string Exp::binopToChar(BinaryOp op) {
 // }
 
 
-ForStatment::ForStatement(Exp* condition, list<Stm*> dolist){
-    this->condition = condition;
+ForStatement::ForStatement(Exp* cond, Exp* l, Exp* r, list<Stm*> dolist){
+    this->cond = cond;
+    this->left = l;
+    this->right = r;
     this->dolist = dolist;
 }
 
-int ForStatement::accept(Visitor* visitor){
+void ForStatement::accept(Visitor* visitor){
     return visitor->visit(this);
 }
 
 ForStatement::~ForStatement(){
-    delete condition;
+    delete cond;
+    delete left;
+    delete right;
     for (Stm* s : dolist) {
         delete s;
     }
@@ -91,3 +95,6 @@ int AssignStatement::accept(Visitor* visitor){
     return visitor->visit(this);
 }
 
+int NotExp::accept(Visitor *visitor) {
+    return visitor->visit(this);
+}

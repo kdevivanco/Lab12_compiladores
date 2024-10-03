@@ -13,6 +13,8 @@ private:
     bool advance();
     bool isAtEnd();
     list<Stm*> parseStmList();
+    Exp* parseAExp();
+    Exp* parseBExp();
     Exp* parseCExp();
     Exp* parseExpression();
     Exp* parseTerm();

@@ -6,7 +6,7 @@
 #include <list>
 #include "visitor.h"
 using namespace std;
-enum BinaryOp { PLUS_OP, MINUS_OP, MUL_OP, DIV_OP,LT_OP, LE_OP, EQ_OP };
+enum BinaryOp { PLUS_OP, MINUS_OP, MUL_OP, DIV_OP,LT_OP, LE_OP, EQ_OP, AND_OP, OR_OP, NOT_OP};
 
 class Exp {
 public:
@@ -31,6 +31,15 @@ public:
     int accept(Visitor* visitor);
     ~BinaryExp();
 };
+
+class NotExp : public Exp {
+public:
+    Exp *exp;
+    NotExp(Exp* e);
+    int accept(Visitor* visitor);
+    ~NotExp();
+};
+
 
 class NumberExp : public Exp {
 public:
@@ -96,12 +105,12 @@ public:
 
 class ForStatement : public Stm {
 public:
-    Exp* condition;
+    Exp *cond,*left, *right;
     list<Stm*> dolist;
-    ForStatement(Exp* condition, list<Stm*> dolist);
-    int accept(Visitor* visitor);
+    ForStatement(Exp* cond, Exp* l, Exp* r, list<Stm*> dolist);
+    void accept(Visitor* visitor);
     ~ForStatement();
-}
+};
 
 class Program {
 public:
